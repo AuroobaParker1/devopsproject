@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./react-tutorial
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+
+  backend:
+    build:
+      context: ./Thrift_Store
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
