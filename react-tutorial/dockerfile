@@ -1,5 +1,5 @@
 # node as parent/base image
-FROM node:16.15.0 
+FROM node:alpine 
 
 # sets the working directory 
 WORKDIR /app
