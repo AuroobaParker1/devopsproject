@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:5000';
 
 function SellersPage() {
     const [category, setCategory] = useState('');
