@@ -23,9 +23,9 @@ function Cart() {
                                 <span className='ms-3 fw-bold'>Rs. {item.productPrice}</span>                            
                             </div>
                             <div className='col-2 d-flex justify-content-end align-items-center pe-2'>
-                                <a href='#' className='text-black'>
+                                <button className='text-black'>
                                     <AiOutlineClose size={22} onClick={()=>clearItemHandler(item)}/>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     )) 

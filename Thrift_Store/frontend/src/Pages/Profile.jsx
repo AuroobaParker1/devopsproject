@@ -154,7 +154,7 @@ function Profile() {
                     <div className="modal-content">
                         <div className="modal-body d-flex">                            
                             <h1 className="modal-title fs-5 fw-bold col-11 my-4" id="exampleModalLabel">Profile updated successfully!</h1>                                                    
-                            <a href='#' className='text-black col-1 text-end'><AiOutlineClose size={20} data-bs-dismiss="modal"/></a>
+                            <button className='text-black col-1 text-end'><AiOutlineClose size={20} data-bs-dismiss="modal"/></button>
                         </div>
                     </div>
                 </div>

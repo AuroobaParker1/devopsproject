@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import ShopPage from "./Pages/shop_page";
 import LoginPage from "./Pages/login_page";
 import Register from "./Pages/register_page";
 import ForgotPassword from "./Pages/forgot_page";
 import VerifyPassword from "./Pages/verify_page";
 import LandingPage from "./Pages/LandingPage";
-import Layout from "./Componenst/shopping/layout";
 import AdminLayout from "./Componenst/admin/AdminLayout";
 import Product from "./Pages/Product";
 import SellersPage from "./Pages/SellersPage";
@@ -22,19 +20,15 @@ import AdminProducts from "./Pages/AdminProducts";
 import AdminOrders from "./Pages/AdminOrders";
 import AdminUsers from "./Pages/AdminUsers";
 import AdminShippers from "./Pages/AdminShippers";
-import { useState } from "react";
+import PrivateRoute from "./Componenst/shopping/layout/PrivateRoute";
 
 function App() {
   const [search, setSearch] = useState(null);
-  const handleSearch = (query) => {
-    setSearch(query);
-  };
-  // console.log(search);
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout setSearch={setSearch} />}>
+          <Route path="/" element={<PrivateRoute setSearch={setSearch} />}>
             <Route index element={<LandingPage search={search} />} />
             <Route path="product/:id" element={<Product />} />
             <Route path="cart" element={<Cart />} />
@@ -56,6 +50,8 @@ function App() {
               element={
                 localStorage.getItem("userID") ? (
                   <SellersPage />
+                  // <SellerProducts />
+
                 ) : (
                   <div>Login required</div>
                 )

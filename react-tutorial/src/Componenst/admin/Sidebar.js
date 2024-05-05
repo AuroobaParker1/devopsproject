@@ -2,9 +2,8 @@ import classNames from 'classnames';
 import React from 'react'
 import {FcComboChart} from 'react-icons/fc';
 import {FiLogOut} from 'react-icons/fi'
-import { HiOutlineLogout } from 'react-icons/hi';
 import { Link, useLocation } from 'react-router-dom';
-import {HiOutlineViewGrid,HiOutlineCube,HiOutlineShoppingCart,HiOutlineUsers,HiOutlineDocumentText} from 'react-icons/hi'
+import {HiOutlineViewGrid,HiOutlineCube,HiOutlineShoppingCart,HiOutlineUsers} from 'react-icons/hi'
 
 const DASHBOARD_SIDEBAR_LINKS = [
 	{

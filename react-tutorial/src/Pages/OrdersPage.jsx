@@ -26,7 +26,7 @@ function OrdersPage() {
         };
     
         fetchData();
-      }, []);
+      }, [id]);
 
       const handleOrderDetails=(order)=>{
         setSelectedOrder(order);

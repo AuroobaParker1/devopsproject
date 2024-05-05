@@ -24,6 +24,7 @@ function AdminShippers() {
         shipperID: shipperID,
         shipperStatus: shipperStatus
       });
+      console.log(response)
       
       setShippers(prevShippers =>
         prevShippers.map(shipper =>

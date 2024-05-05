@@ -61,6 +61,7 @@ export default function ForgotPassword() {
       const response = await axios.post(FORGOT_URL, JSON.stringify({ data, token }), {
         headers: { "Content-Type": "application/json" },
       });
+      console.log(response)
 
       setAuth({ data });
       setSuccess(true);

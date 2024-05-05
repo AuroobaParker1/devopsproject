@@ -12,11 +12,10 @@ function CheckoutPage() {
   const [address,setAddress]=useState('');
   const [upAdd,setUpAdd]=useState(false);
   const [newAddress, setNewAddress] = useState('');
-  const { cartItems,cartTotal,clearItemFromCart } = useContext(CartContext);
+  const { cartItems,cartTotal } = useContext(CartContext);
   const [orderno,setOrderno]=useState(12345);
   const [Comments,setComments]=useState('');
   const [type,setType]=useState('');
-  const [order,setOrder]=useState('');
 
   const id=localStorage.getItem('userID')
   const [data, setData] = useState({
@@ -106,7 +105,6 @@ function CheckoutPage() {
   
       const response = await axios.post('/user/create-order', orderData);
       const createdOrder = response.data.order;
-      setOrder(createdOrder);
   
       setOrderno(createdOrder.orderNo); // Update the order number state variable
   

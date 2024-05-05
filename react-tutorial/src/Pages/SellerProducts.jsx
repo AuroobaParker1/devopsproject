@@ -19,7 +19,7 @@ function SellerProducts() {
         };
 
         fetchProducts();
-    }, []);
+    }, [sellerID]);
 
   return (
     <div className='m-4'>        

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PieChartData from '../../utils/pieChart'
 import { PieChart, Pie, Cell, Legend } from 'recharts'
 import axios from 'axios'
 

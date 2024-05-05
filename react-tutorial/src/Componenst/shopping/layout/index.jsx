@@ -1,20 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Header from './header'
 import { Outlet } from 'react-router-dom'
 
-function Layout({setSearch}) {
-  const handleSearch = (query) => {
-    setSearch(query);
-  };
-
+function Layout({ setSearch }) {
   return (
     <div>
-        <Header setSearch={setSearch}/>    
-        <div className='m-4 '>
-          <Outlet/>
-        </div>    
+      <Header setSearch={setSearch} />
+      <div className='m-4 '>
+        <Outlet />
+      </div>
     </div>
-    
+
   )
 }
 
