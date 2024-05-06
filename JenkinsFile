@@ -23,9 +23,9 @@ pipeline {
         stage('Push Docker Images') {            
             steps {
                 echo 'Pushing Docker Image...' 
-                withCredentials([usernamePassword(credentialsId: 'dockercreds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    bat "docker login -u %DOCKERHUB_USERNAME% --password-stdin %DOCKERHUB_PASSWORD%"
-                }               
+                environment {
+                    registryCredential = '8ce1ad5a-4806-4f4d-b259-b22f9df7f851'
+                }           
                 script {
                     docker.withRegistry( '', registryCredential) {
                         dockerImageBackend.push("latest")
