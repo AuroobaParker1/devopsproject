@@ -1,17 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-        // stage('Checkout SCM') {
-        //     steps {
-        //         git credentialsId: '1cdec1d8-91fd-4419-8624-1c430755e65a', url: 'https://github.com/AuroobaParker1/devopsproject'
-        //     }
-        // }   
-        stage('Initial stage') {
-            steps {
-                echo 'initial stage'
-            }
-        }
+    stages {        
         stage('minikube config') {
             steps {
                 echo 'Starting minikube...'
@@ -33,23 +23,15 @@ pipeline {
                 bat 'cd..'                           
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-            }
-        } 
         stage('deploy on minikube'){
             steps {                
-                    bat 'kubectl apply -f Kunbernetes/mongo-deployment.yaml'
-                    bat 'kubectl apply -f Kunbernetes/backend-deployment.yaml'
-                    bat 'kubectl apply -f Kunbernetes/frontend-deployment.yaml'
-                    bat 'kubectl port-forward service/backend 5000:5000'
-                    bat 'kubectl port-forward service/frontend 3000:3000'
-
-                               
+                bat 'kubectl apply -f ./Kunbernetes/mongo-deployment.yaml'
+                bat 'kubectl apply -f ./Kunbernetes/backend-deployment.yaml'
+                bat 'kubectl apply -f ./Kunbernetes/frontend-deployment.yaml'
+                bat 'kubectl port-forward service/backend 5000:5000'
+                bat 'kubectl port-forward service/frontend 3000:3000'                               
             }
-        }
-               
+        }               
     }
     post {
         success {
