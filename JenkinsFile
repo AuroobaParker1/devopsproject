@@ -26,12 +26,12 @@ pipeline {
             steps {
                 echo 'Building...'                
                 bat 'cd Thrift_Store' 
-                bat 'ls'                                           
-                bat 'docker build -t thriftstore-be:latest -f Dockerfile .'   
+                bat 'dir'                                           
+                bat 'docker build -t thriftstore-be:latest -f Dockerfile . --cache-from thriftstore-be:latest'   
                 bat 'cd..' 
                 bat 'cd react-tutorial'  
-                bat 'ls'                                          
-                bat 'docker build -t thriftstore-fe:latest -f Dockerfile .'
+                bat 'dir'                                          
+                bat 'docker build -t thriftstore-fe:latest -f Dockerfile . --cache-from thriftstore-fe:latest'
                 bat 'cd..'                           
             }
         }
