@@ -1,9 +1,9 @@
 pipeline {
 
     environment {
-        dockerimagebe = 'thriftstore-be'
+        dockerimagebe = 'nawalirfan/thriftstore-be'
         dockerImageBackend = ""
-        dockerimagefe = 'thriftstore-fe'
+        dockerimagefe = 'nawalirfan/thriftstore-fe'
         dockerImageFrontend = ""
         registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
     }
