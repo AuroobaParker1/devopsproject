@@ -15,7 +15,7 @@ spec:
       containers:
       - name: backend
         image: nawalirfan/thriftstore-be:latest
-        imagePullPolicy: Always  # Ensures local image usage
+        imagePullPolicy: Always 
         ports:
         - containerPort: 5000
         env:
