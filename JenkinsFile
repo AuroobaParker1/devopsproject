@@ -1,9 +1,9 @@
 pipeline {
 
     environment {
-        dockerimagebe = 'thrift_store/thriftstore-be'
+        dockerimagebe = 'thriftstore-be'
         dockerImageBackend = ""
-        dockerimagefe = 'react-tutorial/thriftstore-fe'
+        dockerimagefe = 'thriftstore-fe'
         dockerImageFrontend = ""
     }
     agent any
@@ -13,8 +13,8 @@ pipeline {
             steps {
                 echo 'Building Docker Image...'                
                 script {
-                    dockerImageBackend = docker.build dockerimagebe
-                    dockerImageFrontend = docker.build dockerimagefe
+                    dockerImageBackend = docker.build("${dockerimagebe}","./Thrift_Store")
+                    dockerImageFrontend = docker.build("${dockerimagefe}","./react-tutorial")
                 }                          
             }
         }
