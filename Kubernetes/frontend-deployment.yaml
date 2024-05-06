@@ -15,7 +15,7 @@ spec:
       containers:
       - name: frontend
         image: nawalirfan/thriftstore-fe:latest
-        imagePullPolicy: Never  # Ensures local image usage
+        imagePullPolicy: Always  # Ensures local image usage
         ports:
         - containerPort: 3000
 
