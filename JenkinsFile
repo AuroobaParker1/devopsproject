@@ -35,28 +35,15 @@ pipeline {
                 }                          
             }
         }   
-        // stage('minikube config') {
-        //     steps {
-        //         echo 'Starting minikube...'
-        //         bat "docker context use default"
-        //         bat 'minikube config set driver docker'
-        //         bat 'minikube start'
-        //         powershell 'minikube docker-env | Invoke-Expression'
-        //         bat 'minikube status'
-        //         bat 'minikube ip'   
-        //         bat 'kubectl config use-context minikube'
-        //         // bat 'minikube logs'                                
-        //     }
-        // }
         stage('deploy on Kubernetes') {
         steps {
             echo 'Deploying on kubernetes'
             script {
                 withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
                     bat 'type %KUBECONFIG%'
-                    bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml'
-                    bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml'
-                    bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml'
+                    bat 'kubectl --kubeconfig %KUBECONFIG% apply -f ./Kubernetes/mongo-deployment.yaml'
+                    bat 'kubectl --kubeconfig %KUBECONFIG% apply -f ./Kubernetes/backend-deployment.yaml'
+                    bat 'kubectl --kubeconfig %KUBECONFIG% apply -f ./Kubernetes/frontend-deployment.yaml'
                 }
             }
         }
