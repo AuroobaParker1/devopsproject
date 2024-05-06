@@ -55,7 +55,9 @@ pipeline {
                 bat 'minikube delete'
                 bat 'minikube start'
                 powershell 'minikube docker-env | Invoke-Expression'
-                bat 'minikube status'                                                                             
+                bat 'minikube status'
+                bat 'minikube ip'   
+                bat 'kubectl config use-context minikube'                                                                             
             }
         }
         stage('deploy on Kubernetes') {
