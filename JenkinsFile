@@ -2,11 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout SCM') {
+        // stage('Checkout SCM') {
+        //     steps {
+        //         git credentialsId: '1cdec1d8-91fd-4419-8624-1c430755e65a', url: 'https://github.com/AuroobaParker1/devopsproject'
+        //     }
+        // }   
+        stage('Initial stage') {
             steps {
-                git credentialsId: '1cdec1d8-91fd-4419-8624-1c430755e65a', url: 'https://github.com/AuroobaParker1/devopsproject'
+                echo 'initial stage'
             }
-        }   
+        }
         stage('minikube config') {
             steps {
                 echo 'Starting minikube...'
