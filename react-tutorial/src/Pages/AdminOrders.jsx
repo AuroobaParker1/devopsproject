@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import {HiDotsVertical} from 'react-icons/hi'
+import axios from '../api/axios';
 
 function AdminOrders() {
   const [orders,setOrders]=useState([]);

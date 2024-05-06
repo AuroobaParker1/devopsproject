@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ProfileImage from '../profile.jpg';
 import { AiOutlineClose } from 'react-icons/ai';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from '../api/axios';
 
 function Profile() {
   const id=localStorage.getItem('userID');    

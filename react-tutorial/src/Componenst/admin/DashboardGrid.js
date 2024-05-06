@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { HiChartPie, HiShoppingCart } from 'react-icons/hi';
 import { IoMdContacts } from 'react-icons/io';
 import { IoBagHandle } from 'react-icons/io5'
+import axios from '../../api/axios';
 
 export default function DashboardGrid() {
     const[products,setProducts]=useState(0);

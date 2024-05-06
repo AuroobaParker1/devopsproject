@@ -5,7 +5,7 @@ import { CartContext } from '../context/CartContext';
 import {BsCashCoin, BsCreditCardFill, BsRecordCircleFill} from 'react-icons/bs'
 import {AiFillHome, AiOutlineCheck, AiOutlinePlus} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api/axios';
 
 function CheckoutPage() {
   const [step,setStep]=useState(1);  

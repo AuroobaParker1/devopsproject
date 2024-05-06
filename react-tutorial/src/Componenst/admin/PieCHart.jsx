@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Cell, Legend } from 'recharts'
-import axios from 'axios'
+import axios from '../../api/axios'
 
 // const data=PieChartData;
 const RADIAN = Math.PI / 180

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-// import products from '../utils/products'
+
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai';
+import axios from '../api/axios';
 
 function SellerProducts() {
     const [products, setProducts] = useState([]);

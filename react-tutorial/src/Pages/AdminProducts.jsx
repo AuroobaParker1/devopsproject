@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { HiTrash } from 'react-icons/hi';
+import axios from '../api/axios';
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
