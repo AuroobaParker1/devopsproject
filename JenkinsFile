@@ -41,7 +41,7 @@ pipeline {
                 bat "docker context use default"
                 bat 'minikube config set driver docker'
                 bat 'minikube start'
-                bat 'minikube docker-env | Invoke-Expression'
+                powershell 'minikube docker-env | Invoke-Expression'
                 bat 'minikube status'
                 bat 'minikube ip'   
                 bat 'kubectl config use-context minikube'
