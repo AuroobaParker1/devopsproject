@@ -35,6 +35,14 @@ pipeline {
                 }                          
             }
         }   
+        stage('minikube config') {
+            steps {
+                echo 'Starting minikube...'
+                // bat "docker context use default"
+                // bat 'minikube config set driver docker'
+                bat 'minikube start'
+            }
+        }
         stage('deploy on Kubernetes') {
         steps {
             echo 'Deploying on kubernetes'
