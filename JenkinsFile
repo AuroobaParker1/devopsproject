@@ -33,7 +33,17 @@ pipeline {
                     }
                 }                          
             }
-        } 
+        }
+        stage('minikube config') {
+            steps {
+                echo 'Starting minikube...'
+                bat "docker context use default"
+                bat 'minikube config set driver docker'
+                bat 'minikube start'
+                powershell 'minikube docker-env | Invoke-Expression'
+                bat 'minikube status'                                                                             
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Testing...'
@@ -51,7 +61,15 @@ pipeline {
                     }
                 }
             }
-        }        
+        } 
+        stage('Port forwarding...') {
+            steps{
+                echo 'port forwarding task being done'
+                echo 'frontend will be running on port 3000!'
+                // bat 'kubectl port-forward service/backend 5000:5000'
+                // bat 'kubectl port-forward service/frontend 3000:3000'
+            }
+        }       
     }
     post {
         success {
