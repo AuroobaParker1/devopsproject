@@ -36,10 +36,10 @@ pipeline {
         }
         stage('minikube config') {
             steps {
-                echo 'Starting minikube...'
+                echo 'Starting minikube...'                
                 bat "docker context use default"
                 bat 'minikube config set driver docker'
-                bat 'minikube start'
+                bat 'minikube start --kubeconfig="${kubeconfigPath}"'
                 powershell 'minikube docker-env | Invoke-Expression'
                 bat 'minikube status'                                                                             
             }
