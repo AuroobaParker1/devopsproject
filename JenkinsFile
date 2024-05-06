@@ -43,7 +43,8 @@ pipeline {
                 bat 'minikube start'
                 bat 'minikube status'
                 bat 'minikube ip'   
-                bat 'kubectl config use-context minikube'         
+                bat 'kubectl config use-context minikube'
+                bat 'kubectl get nodes'         
             }
         }
         stage('deploy on Kubernetes') {
