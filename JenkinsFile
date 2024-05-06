@@ -45,14 +45,7 @@ pipeline {
                 bat 'minikube status'
                 bat 'minikube ip'   
                 bat 'kubectl config use-context minikube'
-                bat 'kubectl get nodes'     
-                bat 'kubectl cluster-info'
-                bat 'kubectl config current-context'
-                bat 'minikube logs'
-                bat 'docker --version'  
-                // bat 'sc query "Docker Desktop Service"'
-                // bat 'sc query "Docker Engine"'
-                // bat 'sc query "com.docker.service"'
+                // bat 'minikube logs'                                
             }
         }
         stage('deploy on Kubernetes') {
