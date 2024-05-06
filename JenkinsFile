@@ -5,6 +5,7 @@ pipeline {
         dockerImageBackend = ""
         dockerimagefe = 'thriftstore-fe'
         dockerImageFrontend = ""
+        registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
     }
     agent any
 
@@ -19,11 +20,12 @@ pipeline {
             }
         }
         stage('Push Docker Images') {
-            environment {
-                registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
-            }
+            
             steps {
-                echo 'Pushing Docker Image...'                
+                echo 'Pushing Docker Image...' 
+                withCredentials([usernamePassword(credentialsId: 'dockercreds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                }               
                 script {
                     docker.withRegistry( '', registryCredential) {
                         dockerImageBackend.push('latest')
