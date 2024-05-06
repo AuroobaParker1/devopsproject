@@ -7,6 +7,7 @@ pipeline {
         dockerImageFrontend = ""
         registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
         kubeconfigSecret = '00256892-d25f-4348-8fdb-4d65fdd39d8b'
+        kubeconfigPath = 'C:\\Users\\irfan\\.kube\\config'    
     }
     agent any
 
@@ -41,9 +42,9 @@ pipeline {
             script {
                 withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
                     bat 'type %KUBECONFIG%'
-                    bat 'kubectl --kubeconfig %KUBECONFIG% apply -f ./Kubernetes/mongo-deployment.yaml'
-                    bat 'kubectl --kubeconfig %KUBECONFIG% apply -f ./Kubernetes/backend-deployment.yaml'
-                    bat 'kubectl --kubeconfig %KUBECONFIG% apply -f ./Kubernetes/frontend-deployment.yaml'
+                    bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/mongo-deployment.yaml --validate=false"
+                    bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/backend-deployment.yaml --validate=false"
+                    bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
                 }
             }
         }
