@@ -42,6 +42,7 @@ pipeline {
                 bat 'minikube config set driver docker'
                 bat 'minikube start'
                 bat 'minikube status'
+                bat 'minikube ip'
             }
         }
         stage('deploy on Kubernetes') {
