@@ -40,9 +40,10 @@ pipeline {
         } 
         stage('deploy on minikube'){
             steps {
+                echo "${WORKSPACE}"
                 // bat 'cd Kubernetes'
                 def kubernetesDir = "${WORKSPACE}\\Kubernetes"
-                bat "cd /D ${kubernetesDir}"
+                bat "cd /D ${kubernetesDir}"                
                 bat 'kubectl apply -f mongo-deployment.yaml'
                 bat 'kubectl apply -f backend-deployment.yaml'
                 bat 'kubectl apply -f frontend-deployment.yaml'
