@@ -10,6 +10,20 @@ pipeline {
     }
     agent any
 
+    stage('Unit Tests Backend') {
+        steps {
+            echo 'Testing backend...'
+            dir('./Thrift_Store') {
+                bat 'npm install'
+                bat 'npm test -- --forceExit'
+            }
+        }
+    } 
+    stage('Unit Tests Frontend') {
+        steps {
+            echo 'Testing frontend...'            
+        }
+    } 
     stages {   
         stage('Build Docker Images') {
             steps {
@@ -43,16 +57,7 @@ pipeline {
                 powershell 'minikube docker-env | Invoke-Expression'
                 bat 'minikube status'                                                                             
             }
-        }
-        stage('Testing Backend') {
-            steps {
-                echo 'Testing...'
-                dir('./Thrift_Store') {
-                    bat 'npm install'
-                    bat 'npm test'
-                }
-            }
-        }  
+        }         
         stage('deploy on Kubernetes') {
             steps {
                 echo 'Deploying on kubernetes'
