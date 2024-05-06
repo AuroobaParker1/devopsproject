@@ -58,16 +58,6 @@ pipeline {
                 bat 'minikube status'                                                                             
             }
         }
-
-        stage('Testing Backend') {
-            steps {
-                echo 'Testing...'
-                dir('./Thrift_Store') {
-                    bat 'npm install'
-                    bat 'npm test'
-                }
-            }
-        }  
         stage('deploy on Kubernetes') {
             steps {
                 echo 'Deploying on kubernetes'
@@ -88,7 +78,22 @@ pipeline {
                 bat 'start cmd /c kubectl port-forward service/backend 5000:5000'
                 bat 'start cmd /c kubectl port-forward service/frontend 3000:3000'                
             }
-        }       
+        }
+        stage('Integration Tests') {
+            steps {
+                bat """
+                    curl -X GET http://localhost:5000/api/status | findstr /i "\"status\": true"
+
+                    if %errorlevel% neq 0 (
+                        echo "Integration test failed! Backend status might be false."
+                        exit /b 1
+                    )
+
+                    echo "Integration test passed! Backend seems healthy."
+                """
+            }
+        }
+      
     }
     post {
         success {
