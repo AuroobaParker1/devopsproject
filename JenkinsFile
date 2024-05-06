@@ -13,7 +13,7 @@ pipeline {
                 bat "docker context use default"
                 bat 'config set driver docker'
                 bat 'minikube start'
-                echo bat 'minikube status'
+                // echo bat 'minikube status'
                 bat '& minikube docker-env | Invoke-Expression'
             }
         }
