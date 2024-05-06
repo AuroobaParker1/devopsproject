@@ -30,9 +30,12 @@ spec:
         #     secretKeyRef:
         #       name: mongo-secret
         #       key: mongo-password
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
       volumes:
       - name: mongo-storage
-        emptyDir: {} 
+        emptyDir: {}
 
 ---
 
