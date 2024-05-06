@@ -63,13 +63,11 @@ pipeline {
             }
         } 
         stage('Port forwarding...') {
-            steps {
-                echo 'Port forwarding task is being done...'
-                echo 'Frontend will be running on port 3000!'
-                bat '''
-                    start kubectl port-forward service/backend 5000:5000
-                    start kubectl port-forward service/frontend 3000:3000
-                '''
+            steps{
+                echo 'port forwarding task being done'
+                echo 'frontend will be running on port 3000!'
+                bat 'start cmd /c kubectl port-forward service/backend 5000:5000'
+                bat 'start cmd /c kubectl port-forward service/frontend 3000:3000'                
             }
         }       
     }
