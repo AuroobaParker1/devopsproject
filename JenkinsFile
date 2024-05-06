@@ -25,9 +25,9 @@ pipeline {
         }
         stage('deploy on minikube'){
             steps {                
-                bat 'kubectl apply -f ./Kunbernetes/mongo-deployment.yaml'
-                bat 'kubectl apply -f ./Kunbernetes/backend-deployment.yaml'
-                bat 'kubectl apply -f ./Kunbernetes/frontend-deployment.yaml'
+                bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml'
+                bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml'
+                bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml'
                 bat 'kubectl port-forward service/backend 5000:5000'
                 bat 'kubectl port-forward service/frontend 3000:3000'                               
             }
