@@ -6,7 +6,7 @@ pipeline {
         dockerimagefe = 'nawalirfan/thriftstore-fe'
         dockerImageFrontend = ""
         registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
-        kubeconfigSecret = credentials('00256892-d25f-4348-8fdb-4d65fdd39d8b')
+        kubeconfigSecret = '00256892-d25f-4348-8fdb-4d65fdd39d8b'
     }
     agent any
 
