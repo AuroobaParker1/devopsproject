@@ -49,6 +49,7 @@ pipeline {
             echo 'Deploying on kubernetes'
             script {
                 withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
+                    bat 'cat %KUBECONFIG%'
                     bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml'
                     bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml'
                     bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml'
