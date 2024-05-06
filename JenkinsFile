@@ -1,5 +1,4 @@
 pipeline {
-
     environment {
         dockerimagebe = 'nawalirfan/thriftstore-be'
         dockerImageBackend = ""
@@ -21,8 +20,7 @@ pipeline {
                 }                          
             }
         }
-        stage('Push Docker Images') {
-            
+        stage('Push Docker Images') {            
             steps {
                 echo 'Pushing Docker Image...' 
                 withCredentials([usernamePassword(credentialsId: 'dockercreds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
@@ -35,21 +33,25 @@ pipeline {
                     }
                 }                          
             }
-        }   
+        } 
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }  
         stage('deploy on Kubernetes') {
-        steps {
-            echo 'Deploying on kubernetes'
-            script {
-                withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
-                    bat 'type %KUBECONFIG%'
-                    bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/mongo-deployment.yaml --validate=false"
-                    bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/backend-deployment.yaml --validate=false"
-                    bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
+            steps {
+                echo 'Deploying on kubernetes'
+                script {
+                    withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
+                        bat 'type %KUBECONFIG%'
+                        bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/mongo-deployment.yaml --validate=false"
+                        bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/backend-deployment.yaml --validate=false"
+                        bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
+                    }
                 }
             }
-        }
-}
-        
+        }        
     }
     post {
         success {
