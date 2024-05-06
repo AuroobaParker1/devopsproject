@@ -45,9 +45,9 @@ pipeline {
                 script {
                     withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
                         bat 'type %KUBECONFIG%'
-                        bat "kubectl apply -f ./Kubernetes/mongo-deployment.yaml --validate=false"
-                        bat "kubectl apply -f ./Kubernetes/backend-deployment.yaml --validate=false"
-                        bat "kubectl apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
+                        bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/mongo-deployment.yaml --validate=false"
+                        bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/backend-deployment.yaml --validate=false"
+                        bat "kubectl --kubeconfig ${kubeconfigPath} apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
                     }
                 }
             }
