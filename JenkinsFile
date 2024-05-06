@@ -24,11 +24,13 @@ pipeline {
         }
         stage('Build Docker Images') {
             steps {
-                echo 'Building...'
-                bat 'cd Thrift_Store'                                            
+                echo 'Building...'                
+                bat 'cd Thrift_Store' 
+                bat 'ls'                                           
                 bat 'docker build -t thriftstore-be:latest -f Dockerfile .'   
                 bat 'cd..' 
-                bat 'cd react-tutorial'                                            
+                bat 'cd react-tutorial'  
+                bat 'ls'                                          
                 bat 'docker build -t thriftstore-fe:latest -f Dockerfile .'
                 bat 'cd..'                           
             }
