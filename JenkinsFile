@@ -20,12 +20,12 @@ pipeline {
                 }                          
             }
         }
-        stage('Push Docker Images') {            
+        stage('Push Docker Images') {   
+            environment {
+                registryCredential = '8ce1ad5a-4806-4f4d-b259-b22f9df7f851'
+            }           
             steps {
-                echo 'Pushing Docker Image...' 
-                environment {
-                    registryCredential = '8ce1ad5a-4806-4f4d-b259-b22f9df7f851'
-                }           
+                echo 'Pushing Docker Image...'          
                 script {
                     docker.withRegistry( '', registryCredential) {
                         dockerImageBackend.push("latest")
