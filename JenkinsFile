@@ -6,6 +6,7 @@ pipeline {
         dockerimagefe = 'nawalirfan/thriftstore-fe'
         dockerImageFrontend = ""
         registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
+        kubeconfigSecret = credentials('00256892-d25f-4348-8fdb-4d65fdd39d8b')
     }
     agent any
 
@@ -38,9 +39,11 @@ pipeline {
         steps {
             echo 'Deploying on kubernetes'
             script {
-                kubernetesDeploy(configs: './Kubernetes/mongo-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
-                kubernetesDeploy(configs: './Kubernetes/backend-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
-                kubernetesDeploy(configs: './Kubernetes/frontend-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
+                withCredentials([kubeconfig: 'kubeconfigSecret']) {
+                    bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml --kubeconfig=$kubeconfig'
+                    bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml --kubeconfig=$kubeconfig'
+                    bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml --kubeconfig=$kubeconfig'
+                }
             }
         }
 }
