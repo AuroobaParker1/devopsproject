@@ -1,70 +1,44 @@
 pipeline {
 
     environment {
-        dockerimagebackend = 'thriftstore-be'
+        dockerimagebe = 'thriftstore-be'
         dockerImageBackend = ""
-        dockerimagefrontend = 'thriftstore-fe'
+        dockerimagefe = 'thriftstore-fe'
         dockerImageFrontend = ""
     }
     agent any
 
     stages {   
-        // stage('Checkout Source code Management') {
-        //     steps {
-        //         echo 'Pulling from git...'
-        //         git 'https://github.com/AuroobaParker1/devopsproject.git'
-                
-        //     }
-        // }     
-        // stage('minikube config') {
-        //     steps {
-        //         echo 'Starting minikube...'
-        //         bat "docker context use default"
-        //         bat 'minikube config set driver docker'
-        //         bat 'minikube start'
-        //         powershell 'minikube docker-env | Invoke-Expression'
-        //     }
-        // }
         stage('Build Docker Images') {
             steps {
                 echo 'Building Docker Image...'                
                 script {
-                    dockerImageBackend = docker.build dockerimagebackend
-                    dockerImageFrontend = docker.build dockerimagefrontend
+                    dockerImageBackend = docker.build dockerimagebe
+                    dockerImageFrontend = docker.build dockerimagefe
                 }                          
             }
         }
         stage('Push Docker Images') {
             environment {
-                registryCred = '1cdec1d8-91fd-4419-8624-1c430755e65a'
+                registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
             }
             steps {
                 echo 'Pushing Docker Image...'                
                 script {
-                    docker.withRegistry( 'https://registry.hub.docker.com', registryCred) {
+                    docker.withRegistry( '', registryCredential) {
                         dockerImageBackend.push('latest')
                         dockerImageFrontend.push('latest')
                     }
                 }                          
             }
-        }
-        // stage('deploy on minikube'){
-        //     steps {                
-        //         bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml'
-        //         bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml'
-        //         bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml'
-        //         bat 'kubectl get pods'
-        //         bat 'kubectl get deployments'
-        //         bat 'kubectl get services'                            
-        //     }
-        // }   
+        }   
         stage('deploy on Kubernetes') {
         steps {
             echo 'Deploying on kubernetes'
             script {
-                kubernetesDeploy(configs: 'path/to/mongo-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
-                kubernetesDeploy(configs: 'path/to/backend-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
-                kubernetesDeploy(configs: 'path/to/frontend-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
+                kubernetesDeploy(configs: './Kubernetes/mongo-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
+                kubernetesDeploy(configs: './Kubernetes/backend-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
+                kubernetesDeploy(configs: './Kubernetes/frontend-deployment.yaml', kubeconfigId: '00256892-d25f-4348-8fdb-4d65fdd39d8b')
             }
         }
 }
