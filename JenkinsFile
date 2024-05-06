@@ -25,11 +25,11 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 echo 'Building...'                
-                bat 'cd Thrift_Store && dir' 
-                bat 'docker build -t thriftstore-be:latest -f Dockerfile . --cache-from thriftstore-be:latest'   
-                bat 'cd..' 
-                bat 'cd react-tutorial && dir'                                                  
-                bat 'docker build -t thriftstore-fe:latest -f Dockerfile . --cache-from thriftstore-fe:latest'
+                // bat 'cd Thrift_Store && dir' 
+                bat 'docker build -t thriftstore-be:latest -f Thrift_Store/Dockerfile Thrift_Store --cache-from thriftstore-be:latest'   
+                // bat 'cd..' 
+                // bat 'cd react-tutorial && dir'                                                  
+                bat 'docker build -t thriftstore-fe:latest -f react-tutorial/Dockerfile react-tutorial --cache-from thriftstore-fe:latest'
                 bat 'cd..'                           
             }
         }
