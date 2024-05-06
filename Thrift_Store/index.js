@@ -32,3 +32,10 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
+
+// api health check
+app.get('/api/status', (req, res) => {
+	res.json({ status: true, message: 'Backend is up and running' });
+});
+
+module.exports = app;
