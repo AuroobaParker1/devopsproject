@@ -8,17 +8,13 @@ pipeline {
                 bat "docker context use default"
                 bat 'minikube config set driver docker'
                 bat 'minikube start'
-                // echo bat 'minikube status'
                 powershell 'minikube docker-env | Invoke-Expression'
             }
         }
         stage('Build Docker Images') {
             steps {
                 echo 'Building...'                
-                // bat 'cd Thrift_Store && dir' 
-                bat 'docker build -t thriftstore-be:latest -f Thrift_Store/Dockerfile Thrift_Store --cache-from thriftstore-be:latest'   
-                // bat 'cd..' 
-                // bat 'cd react-tutorial && dir'                                                  
+                bat 'docker build -t thriftstore-be:latest -f Thrift_Store/Dockerfile Thrift_Store --cache-from thriftstore-be:latest'                                                    
                 bat 'docker build -t thriftstore-fe:latest -f react-tutorial/Dockerfile react-tutorial --cache-from thriftstore-fe:latest'
                 bat 'cd..'                           
             }
@@ -30,9 +26,7 @@ pipeline {
                 bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml'
                 bat 'kubectl get pods'
                 bat 'kubectl get deployments'
-                bat 'kubectl get services'
-                // bat 'kubectl port-forward service/backend 5000:5000'
-                // bat 'kubectl port-forward service/frontend 3000:3000'                               
+                bat 'kubectl get services'                            
             }
         }               
     }
