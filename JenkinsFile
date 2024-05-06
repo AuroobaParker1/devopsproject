@@ -1,7 +1,7 @@
 pipeline {
 
     environment {
-        dockerimagebe = 'Thrift_Store/thriftstore-be'
+        dockerimagebe = 'thrift_store/thriftstore-be'
         dockerImageBackend = ""
         dockerimagefe = 'react-tutorial/thriftstore-fe'
         dockerImageFrontend = ""
