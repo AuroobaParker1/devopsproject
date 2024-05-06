@@ -2,23 +2,47 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout Source') {
+            steps {
+                git branch: 'main', url: 'https://github.com/AuroobaParker1/devopsproject'
+            }
+        }
+        stage('minikube config') {
+            steps {
+                echo 'Starting minikube...'
+                bat "docker context use default"
+                bat 'config set driver docker'
+                bat 'minikube start'
+                echo bat 'minikube status'
+                bat '& minikube docker-env | Invoke-Expression'
+            }
+        }
+        stage('Build Docker Images') {
             steps {
                 echo 'Building...'
-                bat 'docker-compose build'                               
+                bat 'cd Thrift_Store'                                            
+                bat 'docker build -t thriftstore-be:latest -f Dockerfile .'   
+                bat 'cd..' 
+                bat 'cd react-tutorial'                                            
+                bat 'docker build -t thriftstore-fe:latest -f Dockerfile .'
+                bat 'cd..'                           
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing...'
             }
-        }
-        stage('deploy') {
+        } 
+        stage('deploy on minikube'){
             steps {
-                echo 'Deploying...'
-                bat 'docker-compose up' 
+                bat 'kubectl apply -f mongo-deployment.yaml'
+                bat 'kubectl apply -f backend-deployment.yaml'
+                bat 'kubectl apply -f frontend-deployment.yaml'
+                bat 'kubectl port-forward service/backend 5000:5000'
+                bat 'kubectl port-forward service/frontend 3000:3000'
             }
         }
+               
     }
     post {
         success {
