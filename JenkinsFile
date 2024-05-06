@@ -28,8 +28,8 @@ pipeline {
                 }               
                 script {
                     docker.withRegistry( '', registryCredential) {
-                        dockerImageBackend.push('latest')
-                        dockerImageFrontend.push('latest')
+                        dockerImageBackend.push('nawalirfan/thriftstore-be:latest')
+                        dockerImageFrontend.push('nawalirfan/thriftstore-fe:latest')
                     }
                 }                          
             }
