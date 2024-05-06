@@ -1,12 +1,12 @@
 pipeline {
     environment {
-        dockerimagebe = 'nawalirfan/thriftstore-be'
+        dockerimagebe = 'auroobaparker/backend-image'
         dockerImageBackend = ""
-        dockerimagefe = 'nawalirfan/thriftstore-fe'
+        dockerimagefe = 'auroobaparker/frontend-image'
         dockerImageFrontend = ""
-        registryCredential = '1cdec1d8-91fd-4419-8624-1c430755e65a'
-        kubeconfigSecret = '00256892-d25f-4348-8fdb-4d65fdd39d8b'
-        kubeconfigPath = 'C:\\Users\\irfan\\.kube\\config'    
+        registryCredential = '75414fc1-41f1-4690-a367-63bcadaa39a0'
+        kubeconfigSecret = 'cubesecret'
+        kubeconfigPath = 'C:/Users/AuroobaParker/.kube/config'    
     }
     agent any
 
