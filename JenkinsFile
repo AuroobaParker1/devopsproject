@@ -39,10 +39,10 @@ pipeline {
         steps {
             echo 'Deploying on kubernetes'
             script {
-                withCredentials([kubeconfig: 'kubeconfigSecret']) {
-                    bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml --kubeconfig=$kubeconfig'
-                    bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml --kubeconfig=$kubeconfig'
-                    bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml --kubeconfig=$kubeconfig'
+                withCredentials([file(credentialsId: "${kubeconfigSecret}", variable: 'KUBECONFIG')]) {
+                    bat 'kubectl apply -f ./Kubernetes/mongo-deployment.yaml'
+                    bat 'kubectl apply -f ./Kubernetes/backend-deployment.yaml'
+                    bat 'kubectl apply -f ./Kubernetes/frontend-deployment.yaml'
                 }
             }
         }
