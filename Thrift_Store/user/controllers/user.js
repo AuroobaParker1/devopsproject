@@ -1,9 +1,6 @@
 require("dotenv").config();
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
-const sgMail = require("@sendgrid/mail");
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function forgotPassword(req, res) {
   try {
@@ -26,15 +23,6 @@ async function forgotPassword(req, res) {
           token: token,
         },
       };
-      sgMail
-        .send(msg)
-        .then(() => {
-          res.status(200).send("email sent");
-        })
-        .catch((error) => {
-          console.log(error);
-          res.status(401).send(error);
-        });
     }
   } catch (error) {
     console.log(error, "Error Occured");

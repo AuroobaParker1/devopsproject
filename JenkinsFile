@@ -44,9 +44,13 @@ pipeline {
                 bat 'minikube status'                                                                             
             }
         }
-        stage('Test') {
+        stage('Testing Backend') {
             steps {
                 echo 'Testing...'
+                dir('./Thrift_Store') {
+                    bat 'npm install'
+                    bat 'npm test'
+                }
             }
         }  
         stage('deploy on Kubernetes') {
@@ -66,8 +70,8 @@ pipeline {
             steps{
                 echo 'port forwarding task being done'
                 echo 'frontend will be running on port 3000!'
-                bat 'kubectl port-forward service/backend 5000:5000'
-                bat 'kubectl port-forward service/frontend 3000:3000'
+                bat 'start cmd /c kubectl port-forward service/backend 5000:5000'
+                bat 'start cmd /c kubectl port-forward service/frontend 3000:3000'                
             }
         }       
     }
