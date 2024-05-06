@@ -9,22 +9,22 @@ pipeline {
         kubeconfigPath = 'C:/Users/irfan/.kube/config'    
     }
     agent any
-
-    stage('Unit Tests Backend') {
-        steps {
-            echo 'Testing backend...'
-            dir('./Thrift_Store') {
-                bat 'npm install'
-                bat 'npm test -- --forceExit'
+    
+    stages {  
+        stage('Unit Tests Backend') {
+            steps {
+                echo 'Testing backend...'
+                dir('./Thrift_Store') {
+                    bat 'npm install'
+                    bat 'npm test -- --forceExit'
+                }
             }
-        }
-    } 
-    stage('Unit Tests Frontend') {
-        steps {
-            echo 'Testing frontend...'            
-        }
-    } 
-    stages {   
+        } 
+        stage('Unit Tests Frontend') {
+            steps {
+                echo 'Testing frontend...'            
+            }
+        }  
         stage('Build Docker Images') {
             steps {
                 echo 'Building Docker Image...'                
