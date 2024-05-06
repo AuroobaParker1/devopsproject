@@ -38,13 +38,13 @@ pipeline {
             steps {
                 echo 'Starting minikube...'                
                 bat "docker context use default"
-                bat 'minikube config set driver docker'
                 bat 'minikube delete'
                 bat 'minikube start'
                 powershell 'minikube docker-env | Invoke-Expression'
                 bat 'minikube status'                                                                             
             }
         }
+
         stage('Testing Backend') {
             steps {
                 echo 'Testing...'
