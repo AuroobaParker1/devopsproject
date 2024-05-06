@@ -37,6 +37,7 @@ pipeline {
         stage('minikube config') {
             steps {
                 echo 'Starting minikube...'
+                bat 'minikube delete'
                 bat "docker context use default"
                 bat 'minikube config set driver docker'
                 bat 'minikube start --driver docker'
