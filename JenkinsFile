@@ -1,11 +1,9 @@
 pipeline {
 
-    environment {
-        dockerimagebe = 'thriftstore-be'
-        dockerImageBackend = ""
-        dockerimagefe = 'thriftstore-fe'
-        dockerImageFrontend = ""
-    }
+    def dockerimagebe = 'thriftstore-be'
+    def dockerImageBackend = ""
+    def dockerimagefe = 'thriftstore-fe'
+    def dockerImageFrontend = ""
     agent any
 
     stages {   
