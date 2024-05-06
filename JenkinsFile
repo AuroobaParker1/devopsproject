@@ -16,7 +16,7 @@ pipeline {
                 echo 'Testing backend...'
                 dir('./Thrift_Store') {
                     bat 'npm install'
-                    bat 'npm test -- --forceExit'
+                    bat 'npm test'
                 }
             }
         } 
