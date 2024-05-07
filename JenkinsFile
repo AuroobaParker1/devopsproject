@@ -22,7 +22,11 @@ pipeline {
         } 
         stage('Unit Tests Frontend') {
             steps {
-                echo 'Testing frontend...'            
+                echo 'Testing frontend...'   
+                dir('./react-tutorial') {
+                    bat 'npm install'
+                    bat 'npm test'
+                }         
             }
         }  
         stage('Build Docker Images') {
