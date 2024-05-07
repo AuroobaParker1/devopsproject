@@ -52,7 +52,7 @@ pipeline {
                 bat "kubectl apply -f ./Kubernetes/backend-deployment.yaml --validate=false"
                 bat "kubectl apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
                 }
-            }
+            
         } 
         stage('Port forwarding...') {
             steps{
