@@ -45,15 +45,6 @@ pipeline {
                 bat 'minikube status'                                                                             
             }
         }
-        // stage('Testing Backend') {
-        //     steps {
-        //         echo 'Testing...'
-        //         dir('./Thrift_Store') {
-        //             bat 'npm install'
-        //             bat 'npm test'
-        //         }
-        //     }
-        // }  
         stage('deploy on Kubernetes') {
             steps {
                 echo 'Deploying on kubernetes'
