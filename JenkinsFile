@@ -38,10 +38,10 @@ pipeline {
             steps {
                 echo 'Pushing Docker Image...' 
                 environment {
-                    registryCredential = 'dockercreds'
+                    registryCredentials = 'dockercreds'
                 }               
                 script {
-                    docker.withRegistry( '', registryCredential) {
+                    docker.withRegistry( '', registryCredentials) {
                         dockerImageBackend.push("latest")
                         dockerImageFrontend.push("latest")
                     }
