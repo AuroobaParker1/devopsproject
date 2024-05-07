@@ -67,6 +67,13 @@ pipeline {
                 bat "kubectl apply -f ./Kubernetes/frontend-deployment.yaml --validate=false"
                 }
         } 
+        stage('Port forwarding...') {
+            steps{
+                echo 'port forwarding task being done'
+                echo 'frontend will be running on port 3000!'
+                bat 'start cmd /c kubectl port-forward service/frontend 3000:3000'  
+            }
+        }
       
     }
     post {
