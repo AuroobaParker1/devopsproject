@@ -14,6 +14,8 @@ spec:
     spec:
       containers:
       - name: frontend
+        stdin: true 
+        tty: true
         image: auroobaparker/frontend-image:latest
         imagePullPolicy: Always 
         ports:
