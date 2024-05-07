@@ -76,13 +76,13 @@ pipeline {
                 }
             }
         } 
-        stage('Port forwarding...') {
-            steps{
-                echo 'port forwarding task being done'
-                echo 'frontend will be running on port 3000!'
-                bat 'kubectl port-forward service/backend 5000:5000'
-            }
-        }
+        // stage('Port forwarding...') {
+        //     steps{
+        //         echo 'port forwarding task being done'
+        //         echo 'frontend will be running on port 3000!'
+        //         bat 'kubectl port-forward service/backend 5000:5000'
+        //     }
+        // }
         stage('Integration Tests') {
             steps {
                 bat """
